@@ -1,0 +1,41 @@
+@model IEnumerable<CP3_C_.Models.PratosModel> 
+
+<div class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <a class="btn btn-success" asp-action="Cadastrar" asp-controller="Prato">Cadastrar um novo Prato!</a>
+        </div>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-0">
+            @if (Model != null && Model.Any())
+            {
+                foreach (var prato in Model)
+                {
+                    <div class="card mx-3 my-3 p-2" style="width: 12rem">
+                        @if (!string.IsNullOrEmpty(prato.Capa))
+                        {
+                            <img src="/imagem/@prato.Capa" class="card-img-top" style="width: 175px; height: 150px" alt="Imagem do Prato" />
+                        }
+                        else
+                        {
+                            <img src="https://via.placeholder.com/175x150" class="card-img-top" alt="Imagem Padrão" />
+                        }
+
+                        <div class="card-body">
+                            <h5 class="card-title">@prato.Nome</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <a class="btn btn-warning w-100 mb-2" asp-action="Editar" asp-controller="Prato" asp-route-id="@prato.Id">Editar</a>
+                            <a class="btn btn-danger w-100" asp-action="Remover" asp-controller="Prato" asp-route-id="@prato.Id">Remover</a>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="text-center">Nenhum prato encontrado.</p>
+            }
+        </div>
+    </div>
+</div>
